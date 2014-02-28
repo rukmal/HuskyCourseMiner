@@ -1,0 +1,12 @@
+#Ignoring the pycache folder
+__pycache__
+
+#Ignoring all Bytecode python files
+*.pyc
+
+#Ignoring system file
+.DS_Store
+
+#Ignoring sublime project files
+Husky-Class-Miner.sublime-workspace
+Husky-Class-Miner.sublime-project
