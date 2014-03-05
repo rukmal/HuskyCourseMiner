@@ -13,7 +13,13 @@ This application is intended to be used as an API for grabbing and manipulating 
 
 This program will test most of the main functions of this method, mainly grabbing data from the site, getting the title of a specific class, testing the print function and also printing the number of classes found in the course catalog.
 
-The used should expect to see a large amount of data, as this utility prints out all of the descriptions from every single class at UW (12908 as of March 2014). Although testing most of the functionality of this program, it does not test all of it, as the API has more functions that I encourage the suer to explore.
+###Running the Testing Utility
+Download both the HuskyCourseMiner.py and HuskyCourseMiner_tester.py python files into the same directory.
+Then, run the following command in your terminal (works on both UNIX and DOS systems):
+```
+python2.7 HuskyCourseMiner_tester.py
+```
+The user should expect to see a large amount of data, as this utility prints out all of the descriptions from every single class at UW (12908 as of March 2014). Although testing most of the functionality of this program, it does not test all of it, as the API has more functions that I encourage the user to explore.
 
 ##Structure
 The HuskyCourseMiner API stores class data in the form of dictionary within a dictionary. This structure is illustrated below for convenience.
