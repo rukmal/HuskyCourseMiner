@@ -45,6 +45,6 @@ MATH +
 The print function of this method also follows the same guidelines.
 
 ##Contact
-This is an open source project. Contact me if you have an improvement to make and want to put in a push request.
+This is an open source project. Contact me if you have an improvement or if you want to request a pull.
 
 http://rukmal.me
