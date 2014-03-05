@@ -8,5 +8,5 @@ __pycache__
 .DS_Store
 
 #Ignoring sublime project files
-Husky-Class-Miner.sublime-workspace
-Husky-Class-Miner.sublime-project
+Husky-Course-Miner.sublime-workspace
+Husky-Course-Miner.sublime-project
