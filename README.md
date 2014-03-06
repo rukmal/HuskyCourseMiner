@@ -24,7 +24,7 @@ The user should expect to see a large amount of data, as this utility prints out
 ##Structure
 The HuskyCourseMiner API stores class data in the form of dictionary within a dictionary. This structure is illustrated below for convenience.
 ```python
-{department : {classNo : description}}
+{department : {classNo : title}}
 ```
 An example of the structural storage of data is illustrated below:
 ```
