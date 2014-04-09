@@ -9,24 +9,24 @@ from bs4 import BeautifulSoup
 class CourseMiner(object):
 	COURSE_CATALOG_URL = "https://www.washington.edu/students/crscat/" #UW course catalog url
 
-	"""
+	'''
 	Constructor for the CourseMiner object.
 
 	Takes no parameters.
-	"""
+	'''
 	def __init__(self):
 		self.__page = BeautifulSoup(urllib.urlopen(self.COURSE_CATALOG_URL).read())
 		self.__classes = dict()
 		self.__size = 0
 
-	"""
+	'''
 	Private function to split a string into its department abbreviation and course
 	(if possible).
 
 	Returns an list of size 2 with the first position being the characters in the input
 	string and the second position being the numbers in the input string.
 	output = [string (department ID), int (course number)]
-	"""
+	'''
 	def __getClassCode(self, name):
 		sln = []
 		slnNo = ""
@@ -41,12 +41,12 @@ class CourseMiner(object):
 		sln.append(slnNo)
 		return sln
 
-	"""
+	'''
 	Private function to get and return the course description text from a string
 	of HTML syntax. Takes input in the form of a BeautifulSoup object.
 
 	Returns a string with no leading or trailing spaces with the course title.
-	"""
+	'''
 	def __getTitle(self, descr):
 		description = str(descr)
 		output = ""
@@ -60,12 +60,12 @@ class CourseMiner(object):
 		output = output[::-1] #reversing the output
 		return output
 
-	"""
+	'''
 	Constructs a dictionary of all of the classes listed
 	on the UW catalog, along with the class title.
 
 	This function only works with the UW Course Catalog.
-	"""
+	'''
 	def getClasses(self):
 		for link in self.__page.find_all('a'):
 			try:
@@ -89,12 +89,12 @@ class CourseMiner(object):
 			except:
 				pass
 
-	"""
+	'''
 	Takes input in the form XXX 999, where XXX is the class title
 	and 999 is the class number
 
 	Function that returns true if a class exists, and false otherwise.
-	"""
+	'''
 	def containsClass(self, sln):
 		breakdown = self.__getClassCode(sln)
 		for depID in self.__classes:

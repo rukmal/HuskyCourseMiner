@@ -18,4 +18,4 @@ print(CourseMiner) #printing out all of the classes and titles in the course cat
 
 print(CourseMiner.length()) #printing out the number of classes in the catalog
 
-print(CourseMiner.getTitle('cse143')) #printing the title of the class passed through as a parameter
+print(CourseMiner.getTitle('cse331')) #printing the title of the class passed through as a parameter
