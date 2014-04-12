@@ -9,16 +9,17 @@ from bs4 import BeautifulSoup
 class CourseMiner(object):
 	COURSE_CATALOG_URL = "https://www.washington.edu/students/crscat/" #UW course catalog url
 
+	def __init__(self):
 	'''
 	Constructor for the CourseMiner object.
 
 	Takes no parameters.
 	'''
-	def __init__(self):
 		self.__page = BeautifulSoup(urllib.urlopen(self.COURSE_CATALOG_URL).read())
 		self.__classes = dict()
 		self.__size = 0
 
+	def __getClassCode(self, name):
 	'''
 	Private function to split a string into its department abbreviation and course
 	(if possible).
@@ -27,7 +28,6 @@ class CourseMiner(object):
 	string and the second position being the numbers in the input string.
 	output = [string (department ID), int (course number)]
 	'''
-	def __getClassCode(self, name):
 		sln = []
 		slnNo = ""
 		slnName = ""
@@ -41,13 +41,13 @@ class CourseMiner(object):
 		sln.append(slnNo)
 		return sln
 
+	def __getTitle(self, descr):
 	'''
 	Private function to get and return the course description text from a string
 	of HTML syntax. Takes input in the form of a BeautifulSoup object.
 
 	Returns a string with no leading or trailing spaces with the course title.
 	'''
-	def __getTitle(self, descr):
 		description = str(descr)
 		output = ""
 		for i in range(len(description) - 1, -1, -1):
@@ -60,13 +60,13 @@ class CourseMiner(object):
 		output = output[::-1] #reversing the output
 		return output
 
+	def getClasses(self):
 	'''
 	Constructs a dictionary of all of the classes listed
 	on the UW catalog, along with the class title.
 
 	This function only works with the UW Course Catalog.
 	'''
-	def getClasses(self):
 		for link in self.__page.find_all('a'):
 			try:
 				childLink = self.COURSE_CATALOG_URL + link['href']
@@ -89,13 +89,13 @@ class CourseMiner(object):
 			except:
 				pass
 
+	def containsClass(self, sln):
 	'''
 	Takes input in the form XXX 999, where XXX is the class title
 	and 999 is the class number
 
 	Function that returns true if a class exists, and false otherwise.
 	'''
-	def containsClass(self, sln):
 		breakdown = self.__getClassCode(sln)
 		for depID in self.__classes:
 			if breakdown[0] == depID:
@@ -104,19 +104,19 @@ class CourseMiner(object):
 						return True
 		return False
 
+	def getDepartmentClasses(self, department):
 	'''
 	Takes input in the form of XXXm where XXX is the class title
 
 	Function that returns a sorted list of all of the classes within a given department.
 	Throws a KeyError if the department is not found.
 	'''
-	def getDepartmentClasses(self, department):
 		output = []
 		for classID in self.__classes[department.upper()]:
 			output.append(classID)
 		return sorted(output)
 
-
+	def getTitle(self, sln):
 	'''
 	Takes input in the form XXX 999, where XXX is the class title
 	and 999 is the class number.
@@ -124,16 +124,16 @@ class CourseMiner(object):
 	Function that returns the description of a class. Throws a KeyError
 	if the class is not found.
 	'''
-	def getTitle(self, sln):
 		breakdown = self.__getClassCode(sln)
 		return self.__classes[breakdown[0]][int(breakdown[1])]
+
+	def __str__(self):
 
 	'''
 	Overrides the default str method to print out formatted data from the UW course catalog.
 
 	WARNING: The output from this method will be extremely long.
 	'''
-	def __str__(self):
 		output = ""
 		for department in self.__classes:
 			output += 'Department: ' + department + '\n'
@@ -143,8 +143,8 @@ class CourseMiner(object):
 			output += '\n\n'
 		return output
 
+	def length(self):
 	'''
 	Returns the number of classes in the UW course catalog.
 	'''
-	def length(self):
 		return self.__size
